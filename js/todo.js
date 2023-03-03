@@ -25,14 +25,24 @@ const authenticate = () => {
     login.hidden = false;
     user.hidden = true;
     todo.hidden = true;
-    removeTodo();
+    clearTodos();
   }
 };
 
 const addTodo = (val) => {
   const item = document.createElement("li");
-  item.innerText = val;
+  item.innerText = val.memo;
+  const deleteButton = document.createElement("button");
+  deleteButton.innerText = "-";
+  deleteButton.id = val.id;
+  deleteButton.addEventListener("click", handleDeleteClick);
+  item.appendChild(deleteButton);
   todoList.appendChild(item);
+};
+
+const removeTodo = (id) => {
+  const li = document.getElementById(id).parentNode;
+  li.remove();
 };
 
 const showTodo = () => {
@@ -41,7 +51,7 @@ const showTodo = () => {
   });
 };
 
-const removeTodo = () => {
+const clearTodos = () => {
   todoList.innerHTML = "";
 };
 
@@ -51,14 +61,13 @@ const handleLoginSubmit = (e) => {
   const val = name.value;
   localStorage.setItem(USERNAME_KEY, val);
   name.value = "";
-
   authenticate();
 };
 
 const handleTodoSubmit = (e) => {
   e.preventDefault();
   const todoInput = todoForm.querySelector("input");
-  const val = todoInput.value;
+  const val = { id: String(Date.now()), memo: todoInput.value };
   addTodo(val);
   savedTodos.push(val);
   localStorage.setItem(TODO_KEY, JSON.stringify(savedTodos));
@@ -68,6 +77,14 @@ const handleTodoSubmit = (e) => {
 const handleLogoutClick = () => {
   localStorage.removeItem(USERNAME_KEY);
   authenticate();
+};
+
+const handleDeleteClick = (e) => {
+  const id = e.target.id;
+  const newTodos = savedTodos.filter((item) => item.id !== id);
+  savedTodos = newTodos;
+  localStorage.setItem(TODO_KEY, JSON.stringify(savedTodos));
+  removeTodo(id);
 };
 
 loginForm.addEventListener("submit", handleLoginSubmit);

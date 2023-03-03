@@ -25,6 +25,7 @@ const authenticate = () => {
     login.hidden = false;
     user.hidden = true;
     todo.hidden = true;
+    removeTodo();
   }
 };
 
@@ -38,6 +39,10 @@ const showTodo = () => {
   savedTodos.forEach((eachTodo) => {
     addTodo(eachTodo);
   });
+};
+
+const removeTodo = () => {
+  todoList.innerHTML = "";
 };
 
 const handleLoginSubmit = (e) => {

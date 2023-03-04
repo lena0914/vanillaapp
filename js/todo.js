@@ -7,13 +7,13 @@ const logout = document.getElementById("logout");
 
 const todo = document.querySelector(".todo");
 const todoForm = todo.querySelector("form");
-const todoList = document.getElementById("todoList");
+const todoList = document.querySelector(".todoList");
 let savedTodos = [];
 
 const authenticate = () => {
   const userName = localStorage.getItem(USERNAME_KEY);
   if (userName) {
-    user.querySelector("#userName").innerText = `Logged in as ${userName}`;
+    user.querySelector("#userName").innerText = `Hi, ${userName}`;
     login.hidden = true;
     user.hidden = false;
     // show todos only when logged in
@@ -33,7 +33,10 @@ const addTodo = (val) => {
   const item = document.createElement("li");
   item.innerText = val.memo;
   const deleteButton = document.createElement("button");
-  deleteButton.innerText = "-";
+  const icon = document.createElement("i");
+  icon.classList.add(...["bi", "bi-trash", "trashIcon"]);
+  deleteButton.appendChild(icon);
+  // deleteButton.innerText = "-";
   deleteButton.id = val.id;
   deleteButton.addEventListener("click", handleDeleteClick);
   item.appendChild(deleteButton);

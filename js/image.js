@@ -1,4 +1,10 @@
-const IMAGE_LIST = ["img/1.jpg", "img/2.jpg", "img/3.jpg"];
+const IMAGE_LIST = [
+  "img/1.jpg",
+  "img/2.jpg",
+  "img/3.jpg",
+  "img/4.jpg",
+  "img/5.jpg",
+];
 let currentImg;
 let pickedImg;
 
@@ -16,4 +22,4 @@ const changeImg = () => {
   return changeImg;
 };
 
-setInterval(changeImg(), 60000);
+setInterval(changeImg(), 15000);

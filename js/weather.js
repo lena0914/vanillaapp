@@ -1,5 +1,4 @@
 const handleSuccess = (pos) => {
-  console.log(pos);
   const lat = pos.coords.latitude;
   const lon = pos.coords.longitude;
   const API_KEY = "af7c3624f5e0dfa6d69801b45a75f990"; // used only for free API calls
@@ -14,12 +13,11 @@ const handleSuccess = (pos) => {
     const temperature = Math.round(res.main.temp);
     const { description, icon } = res.weather[0];
     const region = res.name;
-
     const weather = document.querySelector(".weather");
     const weatherIcon = document.createElement("img");
     weatherIcon.src = `http://openweathermap.org/img/wn/${icon}.png`;
     weatherIcon.alt = description;
-    const weatherInfo = document.createElement("span");
+    const weatherInfo = document.createElement("div");
     weatherInfo.innerText = `${temperature}°C in ${region}`;
     weather.appendChild(weatherIcon);
     weather.appendChild(weatherInfo);

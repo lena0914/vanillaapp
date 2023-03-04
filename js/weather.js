@@ -17,7 +17,7 @@ const handleSuccess = (pos) => {
     const loading = document.querySelector(".loading");
     loading.remove();
     const weatherIcon = document.createElement("img");
-    weatherIcon.src = `http://openweathermap.org/img/wn/${icon}.png`;
+    weatherIcon.src = `https://openweathermap.org/img/wn/${icon}.png`;
     weatherIcon.alt = description;
     const weatherInfo = document.createElement("span");
     weatherInfo.innerText = `${temperature}°C in ${region}`;

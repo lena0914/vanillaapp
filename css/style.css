@@ -126,3 +126,10 @@ button {
 .trashIcon {
   pointer-events: none;
 }
+
+.loading {
+  min-height: 50px;
+  display: inline-flex;
+  align-items: center;
+  color: #585858;
+}

@@ -14,10 +14,12 @@ const handleSuccess = (pos) => {
     const { description, icon } = res.weather[0];
     const region = res.name;
     const weather = document.querySelector(".weather");
+    const loading = document.querySelector(".loading");
+    loading.remove();
     const weatherIcon = document.createElement("img");
     weatherIcon.src = `http://openweathermap.org/img/wn/${icon}.png`;
     weatherIcon.alt = description;
-    const weatherInfo = document.createElement("div");
+    const weatherInfo = document.createElement("span");
     weatherInfo.innerText = `${temperature}°C in ${region}`;
     weather.appendChild(weatherIcon);
     weather.appendChild(weatherInfo);

@@ -8,6 +8,7 @@ const logout = document.getElementById("logout");
 const todo = document.querySelector(".todo");
 const todoForm = todo.querySelector("form");
 const todoList = document.querySelector(".todoList");
+const todoInput = todoForm.querySelector("input");
 let savedTodos = [];
 
 const authenticate = () => {
@@ -21,6 +22,7 @@ const authenticate = () => {
     savedTodos = JSON.parse(storedTodos) || savedTodos;
     todo.hidden = false;
     showTodo();
+    todoInput.focus();
   } else {
     login.hidden = false;
     user.hidden = true;
@@ -36,7 +38,6 @@ const addTodo = (val) => {
   const icon = document.createElement("i");
   icon.classList.add(...["bi", "bi-trash", "trashIcon"]);
   deleteButton.appendChild(icon);
-  // deleteButton.innerText = "-";
   deleteButton.id = val.id;
   deleteButton.addEventListener("click", handleDeleteClick);
   item.appendChild(deleteButton);
@@ -69,12 +70,12 @@ const handleLoginSubmit = (e) => {
 
 const handleTodoSubmit = (e) => {
   e.preventDefault();
-  const todoInput = todoForm.querySelector("input");
   const val = { id: String(Date.now()), memo: todoInput.value };
   addTodo(val);
   savedTodos.push(val);
   localStorage.setItem(TODO_KEY, JSON.stringify(savedTodos));
   todoInput.value = "";
+  todoInput.focus();
 };
 
 const handleLogoutClick = () => {
